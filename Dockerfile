@@ -35,8 +35,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
-EXPOSE 8000
+EXPOSE 7860 8000
 
-ENV PORT=8000
+ENV PORT=7860
 
-CMD ["sh", "-c", "php artisan migrate --force --seed && php artisan optimize && php artisan serve --host=0.0.0.0 --port=${PORT}"]
+CMD ["sh", "-c", "php artisan migrate --force --seed && php artisan optimize && php artisan serve --host=0.0.0.0 --port=${PORT:-7860}"]
